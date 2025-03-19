@@ -11,6 +11,10 @@ public abstract class BaseItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 22d5989361137606581ffead2a83868f70251403
     private String icon;
     private String description;
 
