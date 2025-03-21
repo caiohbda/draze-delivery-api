@@ -1,8 +1,7 @@
 package draze.delivery.domain.model;
 
 import jakarta.persistence.*;
-
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity(name = "tb_user")
 public class User {
@@ -10,26 +9,30 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+    private String email;
+    private String phone;
+    private String password;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Account account;
+    private Address address;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Card card;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Feature> features;
+    private boolean active;
+    private LocalDateTime createdAt;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<News> news;
-
-    public Long getId() {
-        return id;
+    // Constructors
+    public User() {
+        this.createdAt = LocalDateTime.now();
+        this.active = true;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    // Getters e Setters
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -40,35 +43,55 @@ public class User {
         this.name = name;
     }
 
-    public Account getAccount() {
-        return account;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Card getCard() {
         return card;
     }
 
-    public List<Feature> getFeatures() {
-        return features;
-    }
-
-    public void setFeatures(List<Feature> features) {
-        this.features = features;
-    }
-
-    public List<News> getNews() {
-        return news;
-    }
-
-    public void setNews(List<News> news) {
-        this.news = news;
-    }
-
     public void setCard(Card card) {
         this.card = card;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 }

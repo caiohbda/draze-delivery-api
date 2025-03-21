@@ -2,19 +2,22 @@ package draze.delivery.domain.model;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-
 @Entity(name = "tb_card")
 public class Card {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
     private String number;
+    private String holderName;
+    private String expirationDate;
+    private String cvv;
 
-    @Column(name = "available_limit",scale = 2, precision = 13)
-    private BigDecimal limit;
+    @OneToOne(mappedBy = "card")
+    private User user;
+
+    // Getters e Setters
 
     public Long getId() {
         return id;
@@ -32,11 +35,27 @@ public class Card {
         this.number = number;
     }
 
-    public BigDecimal getLimit() {
-        return limit;
+    public String getHolderName() {
+        return holderName;
     }
 
-    public void setLimit(BigDecimal limit) {
-        this.limit = limit;
+    public void setHolderName(String holderName) {
+        this.holderName = holderName;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public String getCvv() {
+        return cvv;
+    }
+
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
     }
 }

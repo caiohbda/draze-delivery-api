@@ -22,16 +22,29 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id) {
         var user = userService.findById(id);
+
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
         return ResponseEntity.ok(user);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<User> create(@RequestBody User userToCreate) {
-        var userCreated = userService.create(userToCreate);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(userCreated.getId())
-                .toUri();
-        return ResponseEntity.ok(userToCreate);
+    public ResponseEntity<?> create(@RequestBody User userToCreate) {
+        try {
+            var userCreated = userService.create(userToCreate);
+
+            URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(userCreated.getId())
+                    .toUri();
+
+            return ResponseEntity.created(location).body(userCreated);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Erro ao criar usuário");
+        }
     }
 }

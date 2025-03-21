@@ -18,9 +18,3 @@ spring:
       settings:
         trace: true
         web-allow-others: false
-<<<<<<< HEAD
-  server:
-    port: 8081
-
-=======
->>>>>>> 22d5989361137606581ffead2a83868f70251403

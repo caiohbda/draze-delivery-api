@@ -1,10 +1,9 @@
 package draze.delivery.domain.repository;
 
-import draze.delivery.domain.model.User;
+import draze.delivery.domain.model.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-
+public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 }
